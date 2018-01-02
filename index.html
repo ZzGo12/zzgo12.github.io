@@ -249,6 +249,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zzgo12.github.io/2018/01/02/117-Populating-Next-Right-Pointers-in-Each-Node-II/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zzgo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/Avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ZzGo's Home">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/02/117-Populating-Next-Right-Pointers-in-Each-Node-II/" itemprop="url">117. Populating Next Right Pointers in Each Node II</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T19:32:01+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote><p>题目描述如下：<br>Follow up for problem “Populating Next Right Pointers in Each Node”.</p>
+<p>What if the given tree could be any binary tree? Would your previous solution still work?</p>
+<p>Note:</p>
+<p>You may only use constant extra space.<br>For example,<br>Given the following binary tree,</p>
+<pre><code>     1
+   /  \
+  2    3
+ / \    \
+4   5    7
+</code></pre><p>After calling your function, the tree should look like:</p>
+<pre><code>     1 -&gt; NULL
+   /  \
+  2 -&gt; 3 -&gt; NULL
+ / \    \
+4-&gt; 5 -&gt; 7 -&gt; NULL
+</code></pre><footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/" target="_blank" rel="noopener">117. Populating Next Right Pointers in Each Node II</a></cite></footer></blockquote>
+<hr>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ul>
+<li>prev(下一层的前向指针)</li>
+<li>current(当前指针)</li>
+<li>head(下一层的最左指针)</li>
+</ul>
+<p>通过这三个指针的配合使用，模拟层次遍历…<br>从顶点node开始让每个node的prev-&gt;左孩子, 然后左孩子-&gt;右孩子….<br>暂时没看到dfs的做法，虽然标签是dfs， 一开始想了半天DFS未果 菜。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://zzgo12.github.io/2018/01/01/Introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -427,7 +591,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -438,12 +602,21 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
             
 
           </nav>
