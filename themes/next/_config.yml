@@ -154,7 +154,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: http://d.lanrentuku.com/down/png/1309/ninja_sword/ninja_06.png
+avatar: /images/Avatar.png
 
 # Table Of Contents in the Sidebar
 toc:
