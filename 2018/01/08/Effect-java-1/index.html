@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ZzGo&#39;s Home">
 <meta property="og:description" content="创建和销毁对象。 考虑用静态工厂方法代替构造器。 构造器没有名称 不用每次都创建对象   遇到多个构造器参数时考虑用构建器 总的来说就是因为重叠构造器（多个构造器初始化一些缺省参数）写的太繁琐， JAVABEAN(不够安全，可能不一致，而且使得类必须可变)不够给力，而诞生的一种中和方法。大致思想是利用两个类（内层类和外层类），内层类控制类构建的初始化和SETTER，完成后调用内层类的build方">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T09:16:46.336Z">
+<meta property="og:updated_time" content="2018-01-10T09:43:32.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effect java(1)">
 <meta name="twitter:description" content="创建和销毁对象。 考虑用静态工厂方法代替构造器。 构造器没有名称 不用每次都创建对象   遇到多个构造器参数时考虑用构建器 总的来说就是因为重叠构造器（多个构造器初始化一些缺省参数）写的太繁琐， JAVABEAN(不够安全，可能不一致，而且使得类必须可变)不够给力，而诞生的一种中和方法。大致思想是利用两个类（内层类和外层类），内层类控制类构建的初始化和SETTER，完成后调用内层类的build方">
@@ -353,6 +353,35 @@
 <li>总的来说就是因为重叠构造器（多个构造器初始化一些缺省参数）写的太繁琐， JAVABEAN(不够安全，可能不一致，而且使得类必须可变)不够给力，而诞生的一种中和方法。大致思想是利用两个类（内层类和外层类），内层类控制类构建的初始化和SETTER，完成后调用内层类的build方法将内层类的域变量传递给外层类，而外层类的域变量皆是private final，保证了单一不可变类，安全……</li>
 </ul>
 </li>
+<li>用私有构造器或者枚举类型强化Singleton属性<ul>
+<li>在类中声明一个公有final域并且初始化为一个类实例（public static final OBJ instance = new OBJ();) 可以通过反射机制破坏~</li>
+<li>公有成员是个静态工厂方法， 序列化会有问题</li>
+<li>编写一个包含单个元素的枚举类型。 既好序列化，也安全。</li>
+</ul>
+</li>
+<li>通过私有构造器强化不可实例化的能力<ul>
+<li>用于一些工具类，不希望被实例。</li>
+<li>企图通过将类做成抽象类来强制该类不可被实例化~ 非常错误， 因为该类可以被子类化，子类可以被实例，相当于误导使用者</li>
+<li>让类包含私有构造器， 就不能被实例化了~ 有副作用， 它使得类不能被子类化</li>
+</ul>
+</li>
+<li>避免创建不必要的对象<ul>
+<li>一般来说， 最好能重用对象 而不是在每次需要的时候就创建一个相同功能的新对象。</li>
+<li>不可变类重用， String s = new String(‘zzgo’) // nonononono</li>
+<li>可变类 ， 但是我们的需求是生成后不改变， 那么我们可以static final 来控制实例化一次。</li>
+<li>注意自动装箱的情况~ Long sum = 0L , sum += 1. 这样会产生两个对象， 那为何不 long sum = 0L, sum += 1呢？ 优先使用基本类型而不是装箱基本类型， 要当心无意识的自动装箱。</li>
+<li>不要错误地认为“创建对象的代价非常昂贵， 我们应该要尽可能地避免创建对象”。 相反， 小对象的构造器只做很少的显示工作，构建和回收都很廉价。 如果能通过创建附加的对象提升程序的可读性、简洁性 ， WHY NOT?</li>
+<li>必要时如果没能实施保护性拷贝， 将会导致潜在的错误和安全漏洞； 而不必要地创建对象只会影响程序的风格和性能。</li>
+</ul>
+</li>
+<li>消除过期的对象引用<ul>
+<li>栈（先增加后减少） size外的引用即是过期。</li>
+<li>如果一个对象引用被无意识地保留起来了，那么，垃圾回收机制不仅不会处理这个对象，而且也不会处理被这个对象所引用的所有其他对象。</li>
+<li>清空对象引用应该是一种例外， 而不是一种规范行为。</li>
+<li>一般而言， 只要类是自己管理内存， 程序员就应该警惕内存泄漏问题。一旦元素被释放，则该元素中包含的任何对象应用都应该被清空。</li>
+<li>其他内存泄漏来源还有：缓存、监听器和其他回调 （不是很懂O O.）</li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>
@@ -395,6 +424,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/关于灵感/" rel="prev" title="关于灵感">
+                关于灵感 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -471,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -493,7 +526,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
