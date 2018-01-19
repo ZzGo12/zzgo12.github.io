@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Math,Dynamic Programming," />
+  <meta name="keywords" content="Depth-first Search,Breadth-first Search,Dynamic Programming," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
-<meta name="keywords" content="Math,Dynamic Programming">
+<meta name="description" content="题目描述如下：Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. Example 1: Input: 0 0 0 0 1 0 0 0 0 Output: 0 0 0 0 1 0 0 0 0">
+<meta name="keywords" content="Depth-first Search,Breadth-first Search,Dynamic Programming">
 <meta property="og:type" content="article">
-<meta property="og:title" content="368. Largest Divisible Subset">
+<meta property="og:title" content="542. 01 Matrix">
 <meta property="og:url" content="https://zzgo12.github.io/2018/01/03/542-01-Matrix/index.html">
 <meta property="og:site_name" content="ZzGo&#39;s Home">
-<meta property="og:description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
+<meta property="og:description" content="题目描述如下：Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. Example 1: Input: 0 0 0 0 1 0 0 0 0 Output: 0 0 0 0 1 0 0 0 0">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T13:34:18.114Z">
+<meta property="og:updated_time" content="2018-01-15T13:27:32.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="368. Largest Divisible Subset">
-<meta name="twitter:description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
+<meta name="twitter:title" content="542. 01 Matrix">
+<meta name="twitter:description" content="题目描述如下：Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell. The distance between two adjacent cells is 1. Example 1: Input: 0 0 0 0 1 0 0 0 0 Output: 0 0 0 0 1 0 0 0 0">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>368. Largest Divisible Subset | ZzGo's Home</title>
+  <title>542. 01 Matrix | ZzGo's Home</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">368. Largest Divisible Subset</h1>
+          <h1 class="post-title" itemprop="name headline">542. 01 Matrix</h1>
         
 
         <div class="post-meta">
@@ -342,23 +342,37 @@
       
 
       
-        <blockquote><p>题目描述如下：<br>Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0.</p>
-<p>If there are multiple solutions, return any subset is fine.</p>
+        <blockquote><p>题目描述如下：<br>Given a matrix consists of 0 and 1, find the distance of the nearest 0 for each cell.</p>
+<p>The distance between two adjacent cells is 1.</p>
 <p>Example 1:</p>
-<pre><code>nums: [1,2,3]
-
-Result: [1,2] (of course, [1,3] will also be ok)
-</code></pre><p>Example 2:</p>
-<pre><code>nums: [1,2,4,8]
-
-Result: [1,2,4,8]
-</code></pre><footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/largest-divisible-subset/description/" target="_blank" rel="noopener">368. Largest Divisible Subset</a></cite></footer></blockquote>
+<p>Input:</p>
+<pre><code>0 0 0
+0 1 0
+0 0 0
+</code></pre><p>Output:</p>
+<pre><code>0 0 0
+0 1 0
+0 0 0
+</code></pre><p>Example 2:<br>Input:</p>
+<pre><code>0 0 0
+0 1 0
+1 1 1
+</code></pre><p>Output:</p>
+<pre><code>0 0 0
+0 1 0
+1 2 1
+</code></pre><p>Note:</p>
+<ol>
+<li>The number of elements of the given matrix will not exceed 10,000.</li>
+<li>There are at least one 0 in the given matrix.</li>
+<li>The cells are adjacent in only four directions: up, down, left and right.</li>
+</ol>
+<footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/01-matrix/description/" target="_blank" rel="noopener">542. 01 Matrix</a></cite></footer></blockquote>
 <hr>
 <h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ol>
-<li><p>自己的思路是按层次筛选。 先排个序, 然后按层次遍历出可能的subset。 由题意可知， 第一层若是X， 下一层为X的倍数， 再下一层又是上一层的某个倍数。那么为了减少重复，可以推得，若第一层为X，那么第二层应为X的素数倍，第三层为第二层的素数倍……这样然后让第二层以后出现的FLAG打为1， 第一层遍历就可以跳过了。同时还设一个DP数组， 维护的是到达某个值的最大层数。 总之就是DFS出最大层数。时间复杂度不会算了……</p>
+<li><p>DFS加BFS一直T， 看了题解， 感觉过了的DFS是针对会T的样例改进的……，普通DFS貌似过不了，估计是时间卡的严。 BFS确实能过， 自己太菜。大概思路：将MATRIX中非0元素初始化为INF， 然后初始队列状态为所有的0点， 然后取出队首， 查看其四周元素， 如果能够使得其与0距离变小， 才将其加入队列。</p>
 </li>
-<li><p>DP 解法： O(n²)… 维护两个数组 prev[i]: 符合题意的subset的第i个数的前一个数的index， dp[i]: nums[:i+1] 的最长符合题意subset长度。那么就可以</p>
-<p> i: 1 -&gt; len(nums)<br> j: 0 -&gt; i<br> dp[i] = dp[j] + 1, prev[i] = j if not nums[j] % nums[i] and 1 + dp[j] &gt; dp[i]</p>
+<li><p>DP 解法： 抄的别人。<br>For this question, we only need to consider 4 direction, up, down ,left and right.<br>so, first, I go through this matrix from top-left to down-right, and we can find the minimum distance from up and left, then, go through the matrix from down-right to top-left, so we can find the minimum distance from down and right. and it said the elements will not exceed 10,000, so I just set the initial value as 10,000.</p>
 </li>
 </ol>
 
@@ -378,7 +392,9 @@ Result: [1,2,4,8]
       
         <div class="post-tags">
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
+            <a href="/tags/Depth-first-Search/" rel="tag"># Depth-first Search</a>
+          
+            <a href="/tags/Breadth-first-Search/" rel="tag"># Breadth-first Search</a>
           
             <a href="/tags/Dynamic-Programming/" rel="tag"># Dynamic Programming</a>
           
@@ -393,8 +409,8 @@ Result: [1,2,4,8]
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/03/368-Largest-Divisible-Subset/" rel="next" title="368. Largest Divisible Subset">
-                <i class="fa fa-chevron-left"></i> 368. Largest Divisible Subset
+              <a href="/2018/01/03/207-Course-Schedule/" rel="next" title="207. Course Schedule">
+                <i class="fa fa-chevron-left"></i> 207. Course Schedule
               </a>
             
           </div>
@@ -403,8 +419,8 @@ Result: [1,2,4,8]
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/08/Effect-java序/" rel="prev" title="Effect java序">
-                Effect java序 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/03/368-Largest-Divisible-Subset/" rel="prev" title="368. Largest Divisible Subset">
+                368. Largest Divisible Subset <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -491,7 +507,7 @@ Result: [1,2,4,8]
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -513,7 +529,7 @@ Result: [1,2,4,8]
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

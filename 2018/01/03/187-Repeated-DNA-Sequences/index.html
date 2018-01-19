@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Math,Dynamic Programming," />
+  <meta name="keywords" content="Hash Table," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
-<meta name="keywords" content="Math,Dynamic Programming">
+<meta name="description" content="题目描述如下：All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.">
+<meta name="keywords" content="Hash Table">
 <meta property="og:type" content="article">
-<meta property="og:title" content="368. Largest Divisible Subset">
+<meta property="og:title" content="187. Repeated DNA Sequences">
 <meta property="og:url" content="https://zzgo12.github.io/2018/01/03/187-Repeated-DNA-Sequences/index.html">
 <meta property="og:site_name" content="ZzGo&#39;s Home">
-<meta property="og:description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
+<meta property="og:description" content="题目描述如下：All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-03T13:34:18.114Z">
+<meta property="og:updated_time" content="2018-01-19T12:11:35.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="368. Largest Divisible Subset">
-<meta name="twitter:description" content="题目描述如下：Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0. If there are multiple solution">
+<meta name="twitter:title" content="187. Repeated DNA Sequences">
+<meta name="twitter:description" content="题目描述如下：All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>368. Largest Divisible Subset | ZzGo's Home</title>
+  <title>187. Repeated DNA Sequences | ZzGo's Home</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">368. Largest Divisible Subset</h1>
+          <h1 class="post-title" itemprop="name headline">187. Repeated DNA Sequences</h1>
         
 
         <div class="post-meta">
@@ -342,25 +342,16 @@
       
 
       
-        <blockquote><p>题目描述如下：<br>Given a set of distinct positive integers, find the largest subset such that every pair (Si, Sj) of elements in this subset satisfies: Si % Sj = 0 or Sj % Si = 0.</p>
-<p>If there are multiple solutions, return any subset is fine.</p>
+        <blockquote><p>题目描述如下：<br>All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.</p>
+<p>Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.</p>
 <p>Example 1:</p>
-<pre><code>nums: [1,2,3]
+<pre><code>Given s = &quot;AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT&quot;,
 
-Result: [1,2] (of course, [1,3] will also be ok)
-</code></pre><p>Example 2:</p>
-<pre><code>nums: [1,2,4,8]
-
-Result: [1,2,4,8]
-</code></pre><footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/largest-divisible-subset/description/" target="_blank" rel="noopener">368. Largest Divisible Subset</a></cite></footer></blockquote>
+Return:
+[&quot;AAAAACCCCC&quot;, &quot;CCCCCAAAAA&quot;].
+</code></pre><footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/repeated-dna-sequences/description/" target="_blank" rel="noopener">187. Repeated DNA Sequences</a></cite></footer></blockquote>
 <hr>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ol>
-<li><p>自己的思路是按层次筛选。 先排个序, 然后按层次遍历出可能的subset。 由题意可知， 第一层若是X， 下一层为X的倍数， 再下一层又是上一层的某个倍数。那么为了减少重复，可以推得，若第一层为X，那么第二层应为X的素数倍，第三层为第二层的素数倍……这样然后让第二层以后出现的FLAG打为1， 第一层遍历就可以跳过了。同时还设一个DP数组， 维护的是到达某个值的最大层数。 总之就是DFS出最大层数。时间复杂度不会算了……</p>
-</li>
-<li><p>DP 解法： O(n²)… 维护两个数组 prev[i]: 符合题意的subset的第i个数的前一个数的index， dp[i]: nums[:i+1] 的最长符合题意subset长度。那么就可以</p>
-<p> i: 1 -&gt; len(nums)<br> j: 0 -&gt; i<br> dp[i] = dp[j] + 1, prev[i] = j if not nums[j] % nums[i] and 1 + dp[j] &gt; dp[i]</p>
-</li>
-</ol>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>很特别的一题。 因为是连续子串， 可以通过划窗生成。 然后通过HASH得到是否满足题意</p>
 
       
     </div>
@@ -378,9 +369,7 @@ Result: [1,2,4,8]
       
         <div class="post-tags">
           
-            <a href="/tags/Math/" rel="tag"># Math</a>
-          
-            <a href="/tags/Dynamic-Programming/" rel="tag"># Dynamic Programming</a>
+            <a href="/tags/Hash-Table/" rel="tag"># Hash Table</a>
           
         </div>
       
@@ -393,8 +382,8 @@ Result: [1,2,4,8]
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/03/713-Subarray-Product-Less-Than-K/" rel="next" title="368. Largest Divisible Subset">
-                <i class="fa fa-chevron-left"></i> 368. Largest Divisible Subset
+              <a href="/2018/01/02/117-Populating-Next-Right-Pointers-in-Each-Node-II/" rel="next" title="117. Populating Next Right Pointers in Each Node II">
+                <i class="fa fa-chevron-left"></i> 117. Populating Next Right Pointers in Each Node II
               </a>
             
           </div>
@@ -403,8 +392,8 @@ Result: [1,2,4,8]
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/03/207-Course-Schedule/" rel="prev" title="368. Largest Divisible Subset">
-                368. Largest Divisible Subset <i class="fa fa-chevron-right"></i>
+              <a href="/2018/01/03/207-Course-Schedule/" rel="prev" title="207. Course Schedule">
+                207. Course Schedule <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -491,7 +480,7 @@ Result: [1,2,4,8]
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -513,7 +502,7 @@ Result: [1,2,4,8]
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
