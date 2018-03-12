@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ZzGo&#39;s Home">
 <meta property="og:description" content="类和接口。 使类和成员的可访问性最小化 尽可能地使每个类或者成员不被外界访问。 除了公有静态final域的特殊情形之外（常量），公有类都不应该包含公有域 确保公有静态final域所引用的对象都是不可变的。   在公有类中使用访问方法而非公有域 总之，公有类永远都不应该暴露可变的域。   使可变性最小化 不可变类比可变类更加易于设计，实现和使用 优点：线程安全， 易于共享 缺点：开销大， 一旦需要">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-10T03:14:33.553Z">
+<meta property="og:updated_time" content="2018-03-12T02:25:17.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effect-java-2">
 <meta name="twitter:description" content="类和接口。 使类和成员的可访问性最小化 尽可能地使每个类或者成员不被外界访问。 除了公有静态final域的特殊情形之外（常量），公有类都不应该包含公有域 确保公有静态final域所引用的对象都是不可变的。   在公有类中使用访问方法而非公有域 总之，公有类永远都不应该暴露可变的域。   使可变性最小化 不可变类比可变类更加易于设计，实现和使用 优点：线程安全， 易于共享 缺点：开销大， 一旦需要">
@@ -367,21 +367,12 @@
 <li>只有当子类真正是超类的子类型时， 才适合用继承。</li>
 </ul>
 </li>
-<li>避免创建不必要的对象<ul>
-<li>一般来说， 最好能重用对象 而不是在每次需要的时候就创建一个相同功能的新对象。</li>
-<li>不可变类重用， String s = new String(‘zzgo’) // nonononono</li>
-<li>可变类 ， 但是我们的需求是生成后不改变， 那么我们可以static final 来控制实例化一次。</li>
-<li>注意自动装箱的情况~ Long sum = 0L , sum += 1. 这样会产生两个对象， 那为何不 long sum = 0L, sum += 1呢？ 优先使用基本类型而不是装箱基本类型， 要当心无意识的自动装箱。</li>
-<li>不要错误地认为“创建对象的代价非常昂贵， 我们应该要尽可能地避免创建对象”。 相反， 小对象的构造器只做很少的显示工作，构建和回收都很廉价。 如果能通过创建附加的对象提升程序的可读性、简洁性 ， WHY NOT?</li>
-<li>必要时如果没能实施保护性拷贝， 将会导致潜在的错误和安全漏洞； 而不必要地创建对象只会影响程序的风格和性能。</li>
-</ul>
-</li>
-<li>消除过期的对象引用<ul>
-<li>栈（先增加后减少） size外的引用即是过期。</li>
-<li>如果一个对象引用被无意识地保留起来了，那么，垃圾回收机制不仅不会处理这个对象，而且也不会处理被这个对象所引用的所有其他对象。</li>
-<li>清空对象引用应该是一种例外， 而不是一种规范行为。</li>
-<li>一般而言， 只要类是自己管理内存， 程序员就应该警惕内存泄漏问题。一旦元素被释放，则该元素中包含的任何对象应用都应该被清空。</li>
-<li>其他内存泄漏来源还有：缓存、监听器和其他回调 （不是很懂O O.）</li>
+<li>要么为继承而设计，并提供文档说明，要么就禁止继承</li>
+<li>接口优于抽象类<ul>
+<li>现有的类可以很容易更新， 以实现新的接口</li>
+<li>接口是定义mixin(混合类型)的理想选择</li>
+<li>接口允许我们构造非层次结构的类型框架</li>
+<li>通过对你导出的每个重要接口都提供一个抽象的骨架实现类，把接口和抽象类的优点结合起来</li>
 </ul>
 </li>
 <li>避免使用终结方法<ul>
@@ -539,7 +530,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -561,7 +552,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
