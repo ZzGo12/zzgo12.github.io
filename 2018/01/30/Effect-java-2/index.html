@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ZzGo&#39;s Home">
 <meta property="og:description" content="类和接口。 使类和成员的可访问性最小化 尽可能地使每个类或者成员不被外界访问。 除了公有静态final域的特殊情形之外（常量），公有类都不应该包含公有域 确保公有静态final域所引用的对象都是不可变的。   在公有类中使用访问方法而非公有域 总之，公有类永远都不应该暴露可变的域。   使可变性最小化 不可变类比可变类更加易于设计，实现和使用 优点：线程安全， 易于共享 缺点：开销大， 一旦需要">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-12T02:25:17.069Z">
+<meta property="og:updated_time" content="2018-03-21T12:14:54.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effect-java-2">
 <meta name="twitter:description" content="类和接口。 使类和成员的可访问性最小化 尽可能地使每个类或者成员不被外界访问。 除了公有静态final域的特殊情形之外（常量），公有类都不应该包含公有域 确保公有静态final域所引用的对象都是不可变的。   在公有类中使用访问方法而非公有域 总之，公有类永远都不应该暴露可变的域。   使可变性最小化 不可变类比可变类更加易于设计，实现和使用 优点：线程安全， 易于共享 缺点：开销大， 一旦需要">
@@ -375,39 +375,48 @@
 <li>通过对你导出的每个重要接口都提供一个抽象的骨架实现类，把接口和抽象类的优点结合起来</li>
 </ul>
 </li>
-<li>避免使用终结方法<ul>
-<li>JVM会自己回收， 不要你多余操作</li>
-<li>有时候自己终结 反而会导致系统回收变慢（PYTHON 手动CLOSE资源反而有点BUG！ 用WITH）</li>
+<li>接口只用于定义类型</li>
+<li>类层次优于标签类<ul>
+<li>标签类过于冗长、容易出错、并且效率低下</li>
+<li>考虑重构到一个层次结构中去。</li>
+</ul>
+</li>
+<li>用函数对象表示策略<ul>
+<li>一个类仅仅导出一个用于其它对象上的操作，那么这个类相当于指向该方法的指针。这样的实例对象被称为函数对象</li>
+</ul>
+</li>
+<li>优先考虑静态成员类<ul>
+<li>嵌套类包含：静态成员类、 非静态成员类、 匿名类、 局部类</li>
 </ul>
 </li>
 </ol>
 </li>
-<li>对于所有对象都通用的方法。<ol>
-<li>覆盖equals时请遵守通用约定<ul>
-<li>一种实现高质量equals方法的诀窍 1.使用==操作符检查“参数是否为这个对象的引用”。 2.使用instanceof操作符检查“参数是否为正确的类型”。 3.把参数转换成正确的类型。 4.对于该类中的每个“关键”域，检查参数中的域是否与该对象中对应的域相匹配。</li>
-<li>当你编写完成了equals方法之后， 应该问自己：它是否是对称的、传递的、一致的（多次调用结果不变）</li>
-<li>覆盖equals时总要覆盖hashCode</li>
-<li>不要企图让equals方法过于智能。</li>
-<li>不要将equals声明中的Object对象替换为其他的类型。 （相当于不是重载 而是重写， 会出问题）？</li>
+<li>泛型。<ol>
+<li>请不要在新代码中使用原生态类型<ul>
+<li>不安全， 除了instance of</li>
 </ul>
 </li>
-<li>覆盖equals时总要覆盖hashCode<ul>
-<li>hashmap等容器 在比较时首先比较hash 再比较equal， 如果不覆盖hashCode 会出问题。</li>
+<li>消除非受检警告</li>
+<li>列表优先于数组<ul>
+<li>数组是协变且可以具体化的， 泛型是不可变的且可以被擦除的。</li>
 </ul>
 </li>
-<li>始终要覆盖toString</li>
-<li>谨慎地覆盖clone<ul>
-<li>自己从未用过 甚至不知道是神马</li>
-<li>反正不覆盖就是了呗</li>
+<li>优先考虑泛型<ul>
+<li>将类泛型化</li>
 </ul>
 </li>
-<li>考虑实现Comparable接口<ul>
-<li>实现了Comparable接口后， 对象数组排序很简单， Arrays.sort(a);</li>
-<li>要放进TreeSet这种维持大小的容器， 一定要实现comparable</li>
-<li>compareTo方法的通用约定与equals方法很相似</li>
-<li>返回 符号， - 表示 当前这个是小的， 0 一样大 ， + 表示大。 所以有两种方法， 第一、 手比较 返回符号， 第二、 直接 返回 比较结果 （速度快 但是可能溢出）</li>
-</ul>
+<li>优先考虑泛型方法</li>
+<li>利用有限制通配符来提升API的灵活性</li>
+<li>优先考虑类型安全的异构容器</li>
+</ol>
 </li>
+<li>枚举和注解。<ol>
+<li>用enum代替int常量</li>
+<li>用实例域代替序数</li>
+<li>用EnumSet代替位域</li>
+<li>用EnumMap代替序数索引</li>
+<li>用接口模拟可伸缩的枚举</li>
+<li>注解优先于命名模式</li>
 </ol>
 </li>
 </ol>
@@ -530,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +561,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
