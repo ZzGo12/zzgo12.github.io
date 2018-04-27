@@ -1687,7 +1687,7 @@ Output: 3
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://zzgo12.github.io/2018/01/03/187-Repeated-DNA-Sequences/">
+    <link itemprop="mainEntityOfPage" href="https://zzgo12.github.io/2018/01/03/207-Course-Schedule/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zzgo">
@@ -1706,7 +1706,7 @@ Output: 3
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/03/187-Repeated-DNA-Sequences/" itemprop="url">187. Repeated DNA Sequences</a></h1>
+                <a class="post-title-link" href="/2018/01/03/207-Course-Schedule/" itemprop="url">207. Course Schedule</a></h1>
         
 
         <div class="post-meta">
@@ -1780,16 +1780,42 @@ Output: 3
       
         
           
-            <blockquote><p>题目描述如下：<br>All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.</p>
-<p>Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.</p>
-<p>Example 1:</p>
-<pre><code>Given s = &quot;AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT&quot;,
-
-Return:
-[&quot;AAAAACCCCC&quot;, &quot;CCCCCAAAAA&quot;].
-</code></pre><footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/repeated-dna-sequences/description/" target="_blank" rel="noopener">187. Repeated DNA Sequences</a></cite></footer></blockquote>
+            <blockquote><p>题目描述如下：<br>There are a total of n courses you have to take, labeled from 0 to n - 1.</p>
+<p>Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]</p>
+<p>Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?</p>
+<p>For example:</p>
+<pre><code>2, [[1,0]]
+</code></pre><p>There are a total of 2 courses to take. To take course 1 you should have finished course 0. So it is possible.</p>
+<pre><code>2, [[1,0],[0,1]]
+</code></pre><p>There are a total of 2 courses to take. To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.</p>
+<p>Note:</p>
+<ol>
+<li>The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.</li>
+<li>You may assume that there are no duplicate edges in the input prerequisites.</li>
+</ol>
+<footer><strong>leetcode</strong><cite><a href="https://leetcode.com/problems/course-schedule/description/" target="_blank" rel="noopener">207. Course Schedule</a></cite></footer></blockquote>
 <hr>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>很特别的一题。 因为是连续子串， 可以通过划窗生成。 然后通过HASH得到是否满足题意</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ol>
+<li><p>用领接表存图， 会快很多。 （领接表不一定要用链表）</p>
+<pre><code>matrix = [[] for _ in range(numCourses)]
+pre = prerequisites
+for p in pre:
+    matrix[p[0]].append(p[1])
+</code></pre></li>
+<li><p>找是否存在某个子图存在重复的边。 （只写了DFS， 应该拓扑更快？） 利用一个visited数组，每个顶点初始化为0， 表示未遍历。 然后遍历顶点， 如果顶点是未遍历的， 就DFS， DFS返回是否存在重边。</p>
+<p> def dfs(x):</p>
+<pre><code>if visited[x] == -1:
+    return False
+if visited[x] == 1:
+    return True
+visited[x] = -1
+for nx in matrix[x]:
+    if not dfs(nx):
+        return False
+visited[x] = 1
+return True
+</code></pre></li>
+</ol>
 
           
         
